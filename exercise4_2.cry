@@ -1,0 +1,23 @@
+funType0 a = a + 7 : [5] //[5]->[5]
+
+funType1 a b = a + b + 0b0011100 //[7]->[7]->[7]
+
+funType2 a b = (a + 0x12, b + 0x1234) //[8] -> [16] -> ([8], [16])
+
+funType3 (a, b) = (a + 0x12, b + 0x1234) //([8], [16]) -> ([8], [16])
+
+funType4 ((a, b), c) = c + 10 : [32] //{a, b} ((a, b), [32]) -> [32]
+
+funType5 [a, b, c : [10]] = [a, b, c] //[3][10] -> [3][10]
+
+funType6 (a : [3][10]) = [a@0, a@1, a@2] //[3][10] -> [3][10]
+
+//Fun fact! funType5 and funType6 compute the same function.
+//Try, :prove funType5 === funType6
+
+funType7 x = (x, x, [ [[False, True], x], [x, x], [x, x] ]) //[2] -> ([2], [2], [3][2][2])
+
+funType8 = funType2 10 //[16] -> ([8], [16])
+
+funType9 = False  //Bit
+//Is this a function with no arguments, or a variable? Hmmmm...is there a difference? Nope!

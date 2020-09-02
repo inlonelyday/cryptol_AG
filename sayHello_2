@@ -1,0 +1,5 @@
+sayHello:
+    {n}
+    (fin n) =>
+    [n][8] -> [7+n][8]
+sayHello name = "Hello, " # name

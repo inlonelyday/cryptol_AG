@@ -1,0 +1,8 @@
+zeroPrepend :
+    {n1, m} 
+    (fin n1) =>
+    [m] ->[n1+m]
+
+
+    //before1 = repeat`{a=Bit, n=n1} False
+zeroPrepend input = repeat`{a=Bit, n=n1} False # input

@@ -1,0 +1,33 @@
+repeat :
+    {n, a}
+    () =>
+    a -> [n]a
+repeat value = [ value | _ <- zero : [n] ]
+
+polyType0 = repeat`{a=[64], n=2} 7
+
+polyType1 = repeat`{n=4, a=[64]} 7
+
+polyType2 = repeat`{a=Bit, n=20} True
+
+polyType3 = repeat`{n=20, a=Bit} True
+
+polyType4 = repeat`{n=20} True
+
+polyType5 = repeat`{n=4, a=[2][3]} zero
+
+polyType6 = repeat`{n=4, a=[3][7]} [1, 2, 3]
+
+polyType7 = repeat`{n=4} ([1, 2, 3] : [3][7])
+
+polyType8 = repeat 7 : [5][16]
+
+polyType9 = repeat`{a=[16]} 7 : [5][_]
+
+polyType10 = repeat`{n=5} 7 : [_][16]
+
+polyType11 = repeat`{a=[16], n=5} 7
+
+polyType12 = repeat`{5, [16]} 7
+
+polyType13 = repeat`{5} (7 : [16])

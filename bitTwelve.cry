@@ -1,0 +1,5 @@
+bitTwelve :
+    {n}
+    (fin n, n >= 13) =>
+    [n] -> Bit
+bitTwelve x = x@12

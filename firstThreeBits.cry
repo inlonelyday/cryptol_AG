@@ -1,0 +1,2 @@
+firstThreeBits : {n} [3 + n]-> [3]
+firstThreeBits ([a, b, c] # xs) = [a, b, c]

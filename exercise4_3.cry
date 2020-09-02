@@ -1,0 +1,67 @@
+funType10 x = x + x : [10] //[10] -> [10]
+
+
+funType11 a b = [a : Bit, b, b] //Bit -> Bit -> [3]
+
+
+funType12 [a, b] = [a : Bit, b, b] //[2] -> [3]
+
+
+funType13 (a, b) = [a : Bit, b, b] //(Bit, Bit) -> [3]
+
+
+funType14 a b ([c, d], e) = [ (a     , [b, b, b]),
+                              ([d, d], [c, c, c]),
+                              (a     , e) ] 
+                              //{a} [2]a -> a -> ([2]a, [3]a) -> [3]([2]a, [3]a)
+
+
+funType15 a b = [ a, b, a, b, a, b,
+                  a, b, a, b, a, b,
+                  a, b, a, b, a, b,
+                  a, b, a, b, a, b,
+                  a, b, a, b, a, b,
+                  a, b, a, b, a, b,
+                  a, b, a, b, a, b ]
+                  //{a} a -> a -> [42]a
+
+
+
+funType16 a b = [ [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ] ]
+                  //{a} a -> a -> [7][6]a
+
+
+funType17 a b = ( [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ],
+                  [ a, b, a, b, a, b ] )
+                  //{a} a -> a -> ([6]a, [6]a, [6]a, [6]a, [6]a, [6]a, [6]a)
+
+
+funType18 a b = [ ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ) ]
+                  //{a, b} a -> b -> [7](a, b, a, b, a, b)
+
+
+funType19 a b = ( ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ),
+                  ( a, b, a, b, a, b ) )  // We're so sorry
+                  //{a, b} a -> b -> ((a, b, a, b, a, b), (a, b, a, b, a, b), (a, b, a, b, a, b), (a, b, a, b, a, b), (a, b, a, b, a, b), (a, b, a, b, a, b), (a, b, a, b, a, b))
