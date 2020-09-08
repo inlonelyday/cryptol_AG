@@ -1,0 +1,35 @@
+functionF: {n}
+    (fin n, n>=1, n == 1000) => 
+    [n] -> [n]
+
+functionF x = 1 + x^^32 + x^^47 + x^^58 + x^^90 + x^^121 + x^^128 
+
+functionG: {n}
+    (fin n) =>
+    [n] -> [n]
+
+functionG x = 1 + x^^32 + x^^37 + x^^72 + x^^102 + x^^128 + x^^44*x^^60 + x^^61*x^^125 + x^^63*x^^67 + x^^69*x^^101 + x^^80*x^^88 + x^^110*x^^111 + x^^115*x^^117 + x^^46*x^^50*x^^58 + x^^103*x^^104*x^^106 + x^^33*x^^35*x^^36*x^^40
+
+functionH : {n}
+    (fin n) =>
+    [n] -> [n]
+
+functionH x = x0 * x1 + x2 * x3 + x4 * x5 + x6 * x7 + x0 * x4 * x8
+    where
+    x0 = b12
+    x1 = s8
+    x2 = s13
+    x3 = s20
+    x4 = b95
+    x5 = s42
+    x6 = s60
+    x7 = s79
+    x8 = s94
+
+make_yi yi =  hx + s93 + A.0 + A.1 + A.2 + A.3 + A.4 + A.5 + A.6
+    where
+    hx = functionH x 
+    A = (2, 15, 36, 45, 64, 73, 89)
+
+take_s: {n} [n+1]-> [1]
+take_s i xs = xs @ i

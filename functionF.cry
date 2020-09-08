@@ -1,0 +1,5 @@
+functionF: {n}
+    (fin n, n>=1, n == 1000) => 
+    [n] -> [n]
+
+functionF x = 1 + x^^32 + x^^47 + x^^58 + x^^90 + x^^121 + x^^128 
