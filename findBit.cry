@@ -1,0 +1,9 @@
+// input xs - liczba w postaci binarnej o maksymalnie 127 bitach
+// input i - liczba w postaci dziesiętnej lub liczby w postaci binarnej o 7 bitach
+// output - Bit
+// funkcja zwraca bit na podanym miejscu 
+// liczby w postaci binarnej licząc od 0, gdzie 0 to pierwszy bit
+findBit : {n}[n]->[7]-> Bit
+findBit xs i = xs@i
+
+//działa

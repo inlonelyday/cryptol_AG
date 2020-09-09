@@ -1,0 +1,34 @@
+// input xs - liczba w postaci binarnej o maksymalnie 127 bitach
+// input i - liczba w postaci dziesiętnej lub liczby w postaci binarnej o 7 bitach
+// output - Bit
+// funkcja zwraca bit na podanym miejscu 
+// liczby w postaci binarnej licząc od 0, gdzie 0 to pierwszy bit
+findBit : {n}[n]->[7]-> Bit
+findBit xs i = xs@i
+
+//działa
+
+//oblicza z równania S127
+calculateLastS : {n,m}(fin m, m==1)=>[n]-> [m]
+
+calculateLastS s = [findBit s 0] + [findBit s 7] + [findBit s 38] + [findBit s 70] + [findBit s 81] + [findBit s 96]
+
+//działa
+
+calculateLastB: {n,m,l}(fin l, l == 1)=>[n]->[m]->[l]
+
+calculateLastB s b = [findBit s 0]+[findBit b 0]+[findBit b 26]+[findBit b 56]+[findBit b 91]+[findBit b 96]+[findBit b 3]*[findBit b 67]+[findBit b 11]*[findBit b 13]+[findBit b 17]*[findBit b 18]+[findBit b 27]*[findBit b 59]+[findBit b 40]*[findBit b 48]+[findBit b 61]*[findBit b 65]+[findBit b 68]*[findBit b 84]+[findBit b 22]*[findBit b 24]*[findBit b 25]+[findBit b 70]*[findBit b 78]*[findBit b 82]+[findBit b 88]*[findBit b 92]*[findBit b 93]*[findBit b 95]
+
+//działa
+
+functionH: {n,m,l}(fin l, l==1)=>[n]->[m]->[l]
+
+functionH s b = [findBit b 12]*[findBit s 8]+[findBit s 13]*[findBit s 20]+[findBit b 95]*[findBit s 42]+[findBit s 60]*[findBit s 79]+[findBit b 12]*[findBit b 95]*[findBit s 94]
+
+//działa
+
+calculateYT : {n,m,l}(fin l, l==1)=>[n]->[m]->[l]
+
+calculateYT s b = functionH s b + [findBit s 93] + [findBit b 2] + [findBit b 15] + [findBit b 36] + [findBit b 45] + [findBit b 64] + [findBit b 73] + [findBit b 89]
+
+//działa
