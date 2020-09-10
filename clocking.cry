@@ -1,0 +1,35 @@
+functionG: {n}
+    (fin n, n>=1, n==128) =>
+    [n] -> [n]
+
+functionG x = 1 + x^^32 + x^^37 + x^^72 + x^^102 + x^^128 + x^^44*x^^60 + x^^61*x^^125 + x^^63*x^^67 + x^^69*x^^101 + x^^80*x^^88 + x^^110*x^^111 + x^^115*x^^117 + x^^46*x^^50*x^^58 + x^^103*x^^104*x^^106 + x^^33*x^^35*x^^36*x^^40
+
+//input - integer
+// działa
+
+functionF: {n}
+    (fin n, n>=1, n ==128) => 
+    [n] -> [n]
+
+functionF x = 1 + x^^32 + x^^47 + x^^58 + x^^90 + x^^121 + x^^128 
+
+//input - integer
+// działa
+
+abc = [1..256]
+
+dofuncG : {n}(fin n,n>=1,n==128)=>[n]-> [n]
+
+dofuncG b = functionG b 
+
+//działa
+
+dofuncF : {n}(fin n,n>=1,n==128)=>[n]-> [n]
+
+dofuncF b = functionF b 
+
+//działa
+
+repeat : {n, a} () => a -> [n]a
+
+repeat value = [value | _ <- zero : [n]]

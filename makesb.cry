@@ -1,0 +1,8 @@
+makeb : {n}[n]->[n]
+
+makeb key = key
+
+
+makes : {n,m}(n==96, m==128)=>[n]->[m]
+
+makes nonce = nonce # 0b0000_0000_0000_0000_0000_0000_0000_0001
