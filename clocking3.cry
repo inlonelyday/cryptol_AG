@@ -1,0 +1,200 @@
+//dane:
+
+sok = 0b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000111001110010010110101000101111011
+
+bok = 0b00000000000000000000000000000000000000000000000000000001100111101001001100001110101110101011010110101100111011000110011010101010
+
+// input xs - liczba w postaci binarnej o maksymalnie 127 bitach
+// input i - liczba w postaci dziesiętnej lub liczby w postaci binarnej o 7 bitach
+// output - Bit
+// funkcja zwraca bit na podanym miejscu 
+// liczby w postaci binarnej licząc od 0, gdzie 0 to pierwszy bit
+findBit : {n}[n]->[7]-> Bit
+findBit xs i = xs@i
+
+//działa
+
+//oblicza z równania S127 w kolejnym takcie na podstawie s w danym takcie (s musi być ju podane w konkretnym takcie)
+calculateLastS : {n,m}(fin m, m==1)=>[n]-> [m]
+
+calculateLastS s = [findBit s 0] + [findBit s 7] + [findBit s 38] + [findBit s 70] + [findBit s 81] + [findBit s 96]
+
+//działa
+
+// s i b musi być podane w konkretnym takcie
+//oblicza B127 w następnym takcie
+calculateLastB: {n,m,l}(fin l, l == 1)=>[n]->[m]->[l]
+
+calculateLastB s b = [findBit s 0]+[findBit b 0]+[findBit b 26]+[findBit b 56]+[findBit b 91]+[findBit b 96]+[findBit b 3]*[findBit b 67]+[findBit b 11]*[findBit b 13]+[findBit b 17]*[findBit b 18]+[findBit b 27]*[findBit b 59]+[findBit b 40]*[findBit b 48]+[findBit b 61]*[findBit b 65]+[findBit b 68]*[findBit b 84]+[findBit b 22]*[findBit b 24]*[findBit b 25]+[findBit b 70]*[findBit b 78]*[findBit b 82]+[findBit b 88]*[findBit b 92]*[findBit b 93]*[findBit b 95]
+
+//działa
+
+// s i b musi być podane w konkretnym takcie
+functionH: {n,m,l}(fin l, l==1)=>[n]->[m]->[l]
+
+functionH s b = [findBit b 12]*[findBit s 8]+[findBit s 13]*[findBit s 20]+[findBit b 95]*[findBit s 42]+[findBit s 60]*[findBit s 79]+[findBit b 12]*[findBit b 95]*[findBit s 94]
+
+//działa
+
+// s i b musi być podane w konkretnym takcie
+calculateYT : {n,m,l}(fin l, l==1)=>[n]->[m]->[l]
+
+calculateYT s b = functionH s b + [findBit s 93] + [findBit b 2] + [findBit b 15] + [findBit b 36] + [findBit b 45] + [findBit b 64] + [findBit b 73] + [findBit b 89]
+
+//działa
+
+functionG: {n}
+    (fin n, n>=1, n==128) =>
+    [n] -> [n]
+
+functionG x = 1 + x^^32 + x^^37 + x^^72 + x^^102 + x^^128 + x^^44*x^^60 + x^^61*x^^125 + x^^63*x^^67 + x^^69*x^^101 + x^^80*x^^88 + x^^110*x^^111 + x^^115*x^^117 + x^^46*x^^50*x^^58 + x^^103*x^^104*x^^106 + x^^33*x^^35*x^^36*x^^40
+
+//input - integer
+// działa
+
+functionF: {n}
+    (fin n, n>=1, n ==128) => 
+    [n] -> [n]
+
+functionF x = 1 + x^^32 + x^^47 + x^^58 + x^^90 + x^^121 + x^^128 
+
+//input - integer
+// działa
+
+//abc = [1..256]
+//abcd = 256
+
+dofuncG : {n}(fin n,n>=1,n==128)=>[n]-> [n]
+
+dofuncG b = functionG b 
+
+//działa
+
+dofuncF : {n}(fin n,n>=1,n==128)=>[n]-> [n]
+
+dofuncF s = functionF s
+
+//działa
+
+repeat : {n, a}(n==7)=> a -> [n]a
+
+repeat value = [value | _ <- zero :[n]]
+
+//mapSq : {n}
+
+//mapSq l = map (\l -> l*l) l
+
+f : {n,m}(fin n, n>=2, n==100, fin m, m==100)=>[n]->[m]
+
+f w = w +2 
+
+//iterate : {a}(a -> a) -> a -> [inf]a
+
+//iterate f a --> [a, f(a), f(f(a)), ...]
+
+// zrób iterate dofuncG b a potem take`{256}
+
+iter : {n}(fin n, n==128)=>[n]->[inf][n]
+
+iter b = iterate dofuncG b 
+
+
+takeit : {n,l}(fin n, n==128, fin l, l==256)=>[n]->[l][n]
+
+takeit b = take`{l} (iter b)
+
+//działa, udało się!!
+
+//funkcja dla większych taktów t<256
+takeit_1 : {n,l}(fin n, n==128, fin l, l==1000)=>[n]->[l][n]
+
+takeit_1 b = take`{l} (iter b)
+
+//działa
+
+//funkcja st wypisuje s w podanym takcie t
+st : {n,l}(fin n, n==128, fin l, l>=1)=>[n]->[l]->[n]
+
+//bx = 0b00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001000111001110010010110101000101111011
+
+st b t = (takeit b) @ t //t musi być jako liczba w postaci binarnej
+
+//działa
+
+// funkcja dla większych taktów t<256
+st_1 : {n,l}(fin n, n==128, fin l, l>=1)=>[n]->[l]->[n]
+
+st_1 b t = (takeit_1 b) @ t 
+//działa
+
+
+//funkcja st_bit bierze na podstawie liczby binarnej bx o takcie t bit numer nr :)
+
+st_bit : {n, m, l}(fin n, n==128, fin l, l>= 1, fin m, m>= 1)=>[n]->[m]->[l]->Bit
+
+st_bit b t nr = (st b t) @ nr // t i nr w liczbie binarnej
+
+//działa
+
+// obliczamy S127 w następnym takcie 
+// t ma byc do {0,255}
+s127t1 : {n,m,l}(fin n, n==128, fin m, m==1, fin l, l>= 1)=>[n]->[n]->[l]->[m]
+
+s127t1 s b t = calculateLastS (st s t) + calculateYT (st s t) (st b t)
+//działa
+
+// obliczamy B127 w następnym takcie 
+// t ma byc do {0,255}
+b127t1 : {n,m,l}(fin n, n==128, fin m, m==1, fin l, l>= 1)=>[n]->[n]->[l]->[m]
+
+b127t1 s b t = calculateLastB (st s t)(st b t) + calculateYT (st s t) (st b t)
+
+
+//funkcja obliczająca a o podanym j gdzie j {0,63}
+aj : {n,m,l}(fin n, n==128, fin m, m==1, fin l, l>=1)=>[n]->[n]->[l]->[m]
+
+aj s b j = calculateYT (st s j+256) (st b j+256)
+//działa
+
+//funkcja obliczająca r o podanym j gdzie j {0,63}
+rj : {n,m,l}(fin n, n==128, fin m, m==1, fin l, l>= 1)=>[n]->[n]->[l]->[m]
+
+rj s b j = calculateYT (st s j+320) (st b j+320)
+//działa
+
+//funkcja zmieniająca Bit w liczbe binarną
+changeBit : {n}(fin n, n==1)=>Bit->[n]
+
+changeBit bit = if bit == True then 0b1 else 0b0
+//działa
+
+// obliczamy S127 w następnym takcie 
+// t ma byc do {256,383}
+s127t1_1 : {n,m,l}(fin n, n==128, fin m, m==1, fin l, l>= 9)=>[n]->[n]->[l]->[m]
+
+s127t1_1 s b t = calculateLastS (st_1 s t) + changeBit (b@(t-256)) 
+//działa
+
+
+// obliczamy B127 w następnym takcie 
+// t ma byc do {256,383}
+b127t1_1 : {n,m,l}(fin n, n==128, fin m, m==1, fin l, l>= 1)=>[n]->[n]->[l]->[m]
+
+b127t1_1 s b t = calculateLastB (st_1 s t)(st_1 b t) 
+//działa
+
+message = "Cryptol"
+
+//l długość message
+
+//generate keystream
+zi : {n,m,l}(fin n, n>=1, fin m, m ==1, fin l, l ==128)=>[n]->[l]->[l]->[m]
+
+zi i s b = calculateYT(st_1 s i*2+384) (st_1 b i*2+384)
+//działa
+
+//authentication bit
+zi' : {n,m,l}(fin n, n>=1, fin m, m ==1, fin l, l ==128)=>[n]->[l]->[l]->[m]
+
+zi' i s b = calculateYT(st_1 s i*2+384+1) (st_1 b i*2+384+1)
+//działa
